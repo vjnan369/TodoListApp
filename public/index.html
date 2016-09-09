@@ -1,0 +1,60 @@
+<!DOCTYPE>
+<html ng-app = "myApp">
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <title>TodoList App</title>
+</head>
+<body>
+<div class="container" ng-controller="AppCtrl">
+  <h1>Hello, This is about todolist</h1>
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="search name" ng-model="SearchList">
+      </div>
+    </div>
+
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <a href="#" ng-click="sortType='name'; sortReverse=!sortReverse">
+          Name
+           <span ng-show="sortType=='name'&& !sortReverse" class="fa fa-caret-down"></span>
+           <span ng-show="sortType=='name'&& sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="sortType='Todo'; sortReverse=!sortReverse">
+          TodoList
+            <span ng-show="sortType=='Todo'&& !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType=='Todo'&& sortReverse" class="fa fa-caret-up"></span>
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input class="form-control" ng-model="list.name"></td>
+        <td><input class="form-control" ng-model="list.Todo"></td>
+        <td><button class="btn btn-primary" ng-click="addTodoList()">Add TodoList</td>
+      </tr>
+      <tr ng-repeat="list in todoList | orderBy:sortType:sortReverse | filter:SearchList" >
+        <td>{{list.name}}</td>
+        <td>{{list.Todo}}</td>
+        <td><button class="btn btn-danger" ng-click="remove(list._id)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="javascripts/controller.js"></script>
+</body>
+</html>
